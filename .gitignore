@@ -55,3 +55,9 @@ __history/
 
 # Castalia statistics file
 *.stat
+
+Demos*/**/*_Icon.ico
+Demos*/**/*.dproj
+Demos*/**/*.res
+*.otares
+Packages/*.res

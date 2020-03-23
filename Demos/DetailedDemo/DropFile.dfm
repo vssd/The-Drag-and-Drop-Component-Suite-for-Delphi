@@ -102,7 +102,6 @@ object FormFile: TFormFile
     Columns = <>
     HideSelection = False
     MultiSelect = True
-    PopupMenu = PopupMenu1
     TabOrder = 5
     ViewStyle = vsReport
     OnMouseDown = ListView1MouseDown
@@ -114,6 +113,7 @@ object FormFile: TFormFile
     OnDrop = DropFileTarget1Drop
     OnGetDropEffect = DropFileTarget1GetDropEffect
     Target = ListView1
+    WinTarget = 0
     OptimizedMove = True
     Left = 328
     Top = 200
@@ -673,6 +673,7 @@ object FormFile: TFormFile
   object DropDummy1: TDropDummy
     DragTypes = []
     Target = Owner
+    WinTarget = 0
     Left = 256
     Top = 128
   end

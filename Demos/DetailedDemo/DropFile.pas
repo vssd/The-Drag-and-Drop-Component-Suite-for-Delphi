@@ -10,8 +10,8 @@ uses
   DropSource,
   DragDropFile,
   ImgList,
-  ComCtrls, ActiveX, ShlObj, ComObj, Controls, ShellCtrls, Menus, ExtCtrls,
-  StdCtrls, Classes, Forms, Graphics, Windows;
+  ComCtrls, ActiveX, ShlObj, ComObj, Controls, Vcl.Shell.ShellCtrls, Menus, ExtCtrls,
+  StdCtrls, Classes, Forms, Graphics, Windows, System.ImageList;
 
 type
   // Hack to avoid having to install the design time shell controls

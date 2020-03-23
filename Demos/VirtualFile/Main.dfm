@@ -87,6 +87,7 @@ object FormMain: TFormMain
       BorderWidth = 4
       Caption = ' '
       TabOrder = 0
+      OnMouseDown = OnMouseDown
     end
   end
   object DropDummy1: TDropDummy

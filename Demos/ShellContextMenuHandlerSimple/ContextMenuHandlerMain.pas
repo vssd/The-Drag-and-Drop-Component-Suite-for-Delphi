@@ -5,7 +5,7 @@ interface
 uses
   DragDrop, DropTarget, DragDropContext,
   Forms, ShlObj, SysUtils, Classes, Menus, Graphics, Windows, ImgList,
-  Controls;
+  Controls, System.ImageList;
 
 {$include 'DragDrop.inc'}
 
