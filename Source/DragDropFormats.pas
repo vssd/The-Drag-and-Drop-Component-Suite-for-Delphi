@@ -1047,7 +1047,7 @@ begin
     Size := StatStg.cbSize;
     Medium.tymed := TYMED_ISTREAM;
     Medium.unkForRelease := nil;
-    Medium.stm := pointer(Stream);
+    Medium.stm := Pointer(Stream);
     if (Result) and (Size > 0) then
       // Read the given amount of data.
       Result := DoGetDataSized(ADataObject, Medium, Size);
@@ -1291,10 +1291,16 @@ begin
       **
       **   Stream.Seek(0, STREAM_SEEK_SET, {$if CompilerVersion < 29}PLargeInt{$else}PUInt64{$ifend}(nil)^);
       *)
-      OleStream := TOLEStream.Create(Stream);
-      Stream := TFixedStreamAdapter.Create(OleStream, soOwned) as IStream;
 
-      IStream(AMedium.stm) := Stream;
+      OleStream := TOLEStream.Create(Stream);
+
+      //this following code rises a memory leak in madexcept
+      //to prevent this info, add
+      //uses madexcept
+      //HideLeak(TFixedStreamAdapter,1);
+      //HideLeak('GlobalAlloc');
+
+      IStream(AMedium.stm) := TFixedStreamAdapter.Create(OleStream, soOwned);
     except
       Result := False;
     end;

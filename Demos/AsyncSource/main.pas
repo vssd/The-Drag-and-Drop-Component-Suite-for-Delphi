@@ -8,7 +8,7 @@ uses
   DragDrop, DropSource, DragDropFile,
   Messages,
   ActiveX, Windows, Classes, Controls, Forms, StdCtrls, ComCtrls, ExtCtrls,
-  Buttons, ActnList, ToolWin, ImgList;
+  Buttons, ActnList, ToolWin, ImgList, Actions, ImageList, Types;
 
 const
   MSG_PROGRESS = WM_USER;

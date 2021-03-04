@@ -7,7 +7,7 @@ interface
 uses
   ActiveX,//!!!
 
-  MapiDefs,
+  MapiDefs,Types,
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, ComCtrls, StdCtrls, DragDrop, DropTarget, DragDropText, ImgList,
   Menus, ActnList, System.Actions, System.ImageList;
@@ -358,6 +358,9 @@ begin
 //    if ((Win32MajorVersion shl 16) or Win32MinorVersion < $00050001) then
 //      MapiInit.Flags := MapiInit.Flags or MAPI_NO_COINIT;
 
+    {$IFDEF WIN64}
+    MAPIInitialize don't works under Win64???
+    {$ENDIF}
     OleCheck(MAPIInitialize(@MapiInit));
   except
     on E: Exception do
@@ -691,8 +694,8 @@ var
   Buffer: array of byte;
   Data: TMemoryStream;
   SourceStream: IStream;
-  Size: FixedUInt;
-  Dummy: FixedUInt;
+  Size: {$if CompilerVersion < 29}Longint{$else}FixedUInt{$ifend};
+  Dummy: {$if CompilerVersion < 29}Int64{$else}UInt64{$ifend};
 const
   BufferSize = 64*1024; // 64Kb
   MaxMessageSize = 256*1024; // 256 Kb
@@ -774,7 +777,7 @@ var
 
   FileName: AnsiString;
   SourceStream, DestStream: IStream;
-  Dummy: FixedUInt;
+  Dummy: {$if CompilerVersion < 29}Int64{$else}UInt64{$ifend};
 
   Msg: IMessage;
 begin
@@ -812,7 +815,7 @@ begin
           // Another way to do it:
           // DestStream := TFixedStreamAdapter.Create(TFileStream.Create(FileName, fmCreate), soOwned);
 
-          SourceStream.CopyTo(DestStream, High(FixedUInt), Dummy, Dummy);
+          SourceStream.CopyTo(DestStream, 0, Dummy, Dummy);
           DestStream := nil;
 
           Execute(String(FileName));
@@ -958,7 +961,7 @@ var
   s: string;
   Size: integer;
   Stream: IStream;
-  Pos: FixedUInt;
+  Pos: {$if CompilerVersion < 29}LargeInt{$else}LargeUInt{$ifend};
   Msg: IMessage;
   SHFileInfo: TSHFileInfo;
 begin
