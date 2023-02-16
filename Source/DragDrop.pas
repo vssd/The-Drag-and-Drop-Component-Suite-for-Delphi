@@ -1568,7 +1568,6 @@ end;
 
 constructor TDataFormatClasses.Create;
 begin
-  ASSERT(FDataFormatClasses = nil);
   inherited Create;
   FList := TList.Create;
 end;
@@ -1577,12 +1576,10 @@ destructor TDataFormatClasses.Destroy;
 var
   i: integer;
 begin
-  ASSERT(FDataFormatClasses = self);
   for i := FList.Count-1 downto 0 do
     Remove(TDataFormatClass(FList[i]));
   FList.Free;
   inherited Destroy;
-  FDataFormatClasses := nil;
 end;
 
 class function TDataFormatClasses.GetCount: integer;
@@ -1608,7 +1605,8 @@ end;
 
 class procedure TDataFormatClasses.Remove(DataFormat: TDataFormatClass);
 begin
-  Instance.FList.Remove(DataFormat);
+  if Assigned(FDataFormatClasses) then
+    Instance.FList.Remove(DataFormat);
 end;
 
 {$IF CompilerVersion < 17.0}
@@ -1649,23 +1647,22 @@ var
 
 constructor TDataFormatMap.Create;
 begin
-  ASSERT(FDataFormatMap = nil);
   inherited Create;
   FList := TList.Create;
+  RegisterExpectedMemoryLeak(FDataFormatMap);
+  RegisterExpectedMemoryLeak(FList);
 end;
 
 destructor TDataFormatMap.Destroy;
 var
   i: integer;
 begin
-  ASSERT(FDataFormatMap = self);
   // Zap any mapings which hasn't been unregistered
   // yet (actually an error condition)
   for i := FList.Count-1 downto 0 do
     Dispose(FList[i]);
   FList.Free;
   inherited Destroy;
-  FDataFormatMap := nil;
 end;
 
 procedure TDataFormatMap.Sort;
@@ -2503,10 +2500,8 @@ finalization
   // Note: Due to unit finalization order, is is possible for the following two
   // objects to be recreated after this units' finalization has executed.
   // If that happens it will result in a harmless one-time memory leak.
-  if (FDataFormatMap <> nil) then
-    FDataFormatMap.Free;
-  if (FDataFormatClasses <> nil) then
-    FDataFormatClasses.Free;
+  FreeAndNil(FDataFormatMap);
+  FreeAndNil(FDataFormatClasses);
 
   ShellMalloc := nil;
 
