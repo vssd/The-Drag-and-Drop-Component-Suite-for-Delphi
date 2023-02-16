@@ -252,26 +252,26 @@ initialization
   MAPIDLLHandle:=LoadLibrary('MAPI32.DLL');
   if MAPIDLLHandle <> 0 then begin
 
-    HrQueryAllRows:=GetProcAddress(MAPIDLLHandle,'HrQueryAllRows@24');
-    OpenStreamOnFile:=GetProcAddress(MAPIDLLHandle,'OpenStreamOnFile@24');
-    FreeProws:=GetProcAddress(MAPIDLLHandle,'FreeProws@4');
-    FreePAdrList:=GetProcAddress(MAPIDLLHandle,'FreePadrlist@4');
-    HrSzFromEntryID:=GetProcAddress(MAPIDLLHandle,'HrSzFromEntryID@12');
-    HrEntryIDFromSz:=GetProcAddress(MAPIDLLHandle,'HrEntryIDFromSz@12');
-    HrSzFromEntryID:=GetProcAddress(MAPIDLLHandle,'HrSzFromEntryID@12');
-    HrGetOneProp:=GetProcAddress(MAPIDLLHandle,'HrGetOneProp@12');
-    HrSetOneProp:=GetProcAddress(MAPIDLLHandle,'HrSetOneProp@8');
+    HrQueryAllRows:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'HrQueryAllRows'{$ELSE}'HrQueryAllRows@24'{$ENDIF});
+    OpenStreamOnFile:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'OpenStreamOnFile'{$ELSE}'OpenStreamOnFile@24'{$ENDIF});
+    FreeProws:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'FreeProws'{$ELSE}'FreeProws@4'{$ENDIF});
+    FreePAdrList:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'FreePadrlist'{$ELSE}'FreePadrlist@4'{$ENDIF});
+    HrSzFromEntryID:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'HrSzFromEntryID'{$ELSE}'HrSzFromEntryID@12'{$ENDIF});
+    HrEntryIDFromSz:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'HrEntryIDFromSz'{$ELSE}'HrEntryIDFromSz@12'{$ENDIF});
+    HrSzFromEntryID:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'HrSzFromEntryID'{$ELSE}'HrSzFromEntryID@12'{$ENDIF});
+    HrGetOneProp:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'HrGetOneProp'{$ELSE}'HrGetOneProp@12'{$ENDIF});
+    HrSetOneProp:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'HrSetOneProp'{$ELSE}'HrSetOneProp@8'{$ENDIF});
     WrapCompressedRTFStream:=GetProcAddress(MAPIDLLHandle,'WrapCompressedRTFStream');
     RTFSync:=GetProcAddress(MAPIDLLHandle,'RTFSync');
-    CreateTable:=GetProcAddress(MAPIDLLHandle,'CreateTable@36');
-    BuildDisplayTable:=GetProcAddress(MAPIDLLHandle,'BuildDisplayTable@40');
+    CreateTable:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'CreateTable'{$ELSE}'CreateTable@36'{$ENDIF});
+    BuildDisplayTable:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'BuildDisplayTable'{$ELSE}'BuildDisplayTable@40'{$ENDIF});
 
-    OpenIMsgSession:=GetProcAddress(MAPIDLLHandle,'OpenIMsgSession@12');
-    CloseIMsgSession:=GetProcAddress(MAPIDLLHandle,'CloseIMsgSession@4');
-    OpenIMsgOnIStg:=GetProcAddress(MAPIDLLHandle,'OpenIMsgOnIStg@44');
-    GetAttribIMsgOnIStg:=GetProcAddress(MAPIDLLHandle,'GetAttribIMsgOnIStg@12');
-    SetAttribIMsgOnIStg:=GetProcAddress(MAPIDLLHandle,'SetAttribIMsgOnIStg@16');
-    MapStorageSCode:=GetProcAddress(MAPIDLLHandle,'MapStorageSCode@4');
+    OpenIMsgSession:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'OpenIMsgSession'{$ELSE}'OpenIMsgSession@12'{$ENDIF});
+    CloseIMsgSession:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'CloseIMsgSession'{$ELSE}'CloseIMsgSession@4'{$ENDIF});
+    OpenIMsgOnIStg:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'OpenIMsgOnIStg'{$ELSE}'OpenIMsgOnIStg@44'{$ENDIF});
+    GetAttribIMsgOnIStg:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'GetAttribIMsgOnIStg'{$ELSE}'GetAttribIMsgOnIStg@12'{$ENDIF});
+    SetAttribIMsgOnIStg:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'SetAttribIMsgOnIStg'{$ELSE}'SetAttribIMsgOnIStg@16'{$ENDIF});
+    MapStorageSCode:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'MapStorageSCode'{$ELSE}'MapStorageSCode@4'{$ENDIF});
 
     MAPIInitialize:=GetProcAddress(MAPIDLLHandle,'MAPIInitialize');
     MAPIUninitialize:=GetProcAddress(MAPIDLLHandle,'MAPIUninitialize');
@@ -280,12 +280,12 @@ initialization
     MAPIAllocateMore:=GetProcAddress(MAPIDLLHandle,'MAPIAllocateMore');
     MAPIFreeBuffer:=GetProcAddress(MAPIDLLHandle,'MAPIFreeBuffer');
     MAPIAdminProfiles:=GetProcAddress(MAPIDLLHandle,'MAPIAdminProfiles');
-    MAPIGetDefaultMalloc:=GetProcAddress(MAPIDLLHandle,'MAPIGetDefaultMalloc@0');
+    MAPIGetDefaultMalloc:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'MAPIGetDefaultMalloc'{$ELSE}'MAPIGetDefaultMalloc@0'{$ENDIF});
     OpenTnefStreamEx:=GetProcAddress(MAPIDLLHandle,'OpenTnefStreamEx');
-    MAPIInitIdle:=GetProcAddress(MAPIDLLHandle,'MAPIInitIdle@4');
-    MAPIDeinitIdle:=GetProcAddress(MAPIDLLHandle,'MAPIDeinitIdle@0');
-    FtgRegisterIdleRoutine:=GetProcAddress(MAPIDLLHandle,'FtgRegisterIdleRoutine@20');
-    DeregisterIdleRoutine:=GetProcAddress(MAPIDLLHandle,'DeregisterIdleRoutine@4');
+    MAPIInitIdle:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'MAPIInitIdle'{$ELSE}'MAPIInitIdle@4'{$ENDIF});
+    MAPIDeinitIdle:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'MAPIDeinitIdle'{$ELSE}'MAPIDeinitIdle@0'{$ENDIF});
+    FtgRegisterIdleRoutine:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'FtgRegisterIdleRoutine'{$ELSE}'FtgRegisterIdleRoutine@20'{$ENDIF});
+    DeregisterIdleRoutine:=GetProcAddress(MAPIDLLHandle,{$IFDEF WIN64}'DeregisterIdleRoutine'{$ELSE}'DeregisterIdleRoutine@4'{$ENDIF});
 
   end;
 finalization
