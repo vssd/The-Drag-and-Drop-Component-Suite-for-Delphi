@@ -1,4 +1,4 @@
-unit DropTarget;
+﻿unit DropTarget;
 // -----------------------------------------------------------------------------
 // Project:         New Drag and Drop Component Suite
 // Module:          DragDrop
@@ -215,7 +215,7 @@ type
     property ShowImage: boolean read FShowImage write SetShowImage default True;
     // Target
     property Target: TWinControl read GetTarget write SetTarget;
-    property WinTarget: HWND read GetWinTarget write SetWinTarget;
+    property WinTarget: HWND read GetWinTarget write SetWinTarget stored False;
     property MultiTarget: boolean read FMultiTarget write FMultiTarget default False;
     property AutoRegister: boolean read FAutoRegister write FAutoRegister default True;
     // Auto-scroll
@@ -1137,7 +1137,7 @@ begin
 
   // Unregister previous target unless MultiTarget is enabled (for backwards
   // compatibility).
-  if (not FMultiTarget) and not(csLoading in ComponentState) then
+  if (not FMultiTarget) and not (csLoading in ComponentState) then
     Unregister;
 
   if (ATarget = nil) then
