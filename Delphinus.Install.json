@@ -122,6 +122,12 @@
 			"project": "Packages\\DragDropDR12Group.groupproj",
 			"compiler_min":36,
 			"compiler_max": 36
+		},
+
+		{
+			"project": "Packages\\DragDropDR13Group.groupproj",
+			"compiler_min":37,
+			"compiler_max": 37
 		}
     ]
 }
